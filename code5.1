@@ -1,0 +1,43 @@
+p = [0, 1, 0, 0, 0] 
+
+world = ['green', 'red', 'red', 'green', 'green'] 
+
+measurements = ['red', 'green'] 
+
+pHit = 0.6 
+
+pMiss = 0.2 
+
+  
+
+def sense(p, Z): 
+
+    q = [] 
+
+    for i in range(len(p)): 
+
+        hit = (Z == world[i]) 
+
+        q.append(p[i] * (hit * pHit + (1 - hit) * pMiss)) 
+
+    s = sum(q) 
+
+    q_normalized = [val / s for val in q] 
+
+    return q_normalized 
+
+  
+
+def move(p, U): 
+
+    q = [0] * len(p) 
+
+    for i in range(len(p)): 
+
+        q[(i + U) % len(p)] = p[i] 
+
+    return q 
+
+  
+
+print(move(p, 1)) 
